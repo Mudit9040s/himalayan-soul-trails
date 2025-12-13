@@ -1,6 +1,7 @@
 import heroImage from "@/assets/hero-mountains.jpg";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const scrollToPrograms = () => {
@@ -44,11 +45,11 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 animate-fade-up animation-delay-600">
-            <Button variant="hero" size="xl" onClick={scrollToPrograms}>
-              Explore Expeditions
+            <Button variant="hero" size="xl" asChild>
+              <Link to="/expeditions">Explore Expeditions</Link>
             </Button>
-            <Button variant="heroOutline" size="xl">
-              Plan Your Journey
+            <Button variant="heroOutline" size="xl" asChild>
+              <Link to="/contact">Plan Your Journey</Link>
             </Button>
           </div>
         </div>

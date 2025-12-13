@@ -1,18 +1,19 @@
+import { Link } from "react-router-dom";
 import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="bg-card border-t border-border/50">
+    <footer className="bg-card border-t border-border/50">
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <a href="/" className="font-display text-3xl font-bold tracking-tight inline-block mb-4">
+            <Link to="/" className="font-display text-3xl font-bold tracking-tight inline-block mb-4">
               <span className="text-foreground">HI</span>
               <span className="text-primary">MO</span>
-            </a>
+            </Link>
             <p className="text-muted-foreground max-w-md mb-6">
               Himalayan Indian Mountain Outdoor — A collective of passionate mountaineers, 
               explorers, and storytellers driven by the timeless human urge to explore the unknown.
@@ -39,13 +40,26 @@ const Footer = () => {
           <div>
             <h4 className="font-display text-lg font-semibold mb-4">Explore</h4>
             <ul className="space-y-3">
-              {["Himalayan Treks", "Custom Expeditions", "Spiritual Journeys", "About HIMO", "Our Team"].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                    {link}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link to="/expeditions" className="text-muted-foreground hover:text-primary transition-colors">
+                  Himalayan Expeditions
+                </Link>
+              </li>
+              <li>
+                <Link to="/custom-treks" className="text-muted-foreground hover:text-primary transition-colors">
+                  Custom Treks
+                </Link>
+              </li>
+              <li>
+                <Link to="/spiritual-journeys" className="text-muted-foreground hover:text-primary transition-colors">
+                  Spiritual Journeys
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                  Contact Us
+                </Link>
+              </li>
             </ul>
           </div>
 
