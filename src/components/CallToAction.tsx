@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CallToAction = () => {
   return (
@@ -22,12 +23,14 @@ const CallToAction = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 animate-fade-up animation-delay-400">
-            <Button variant="hero" size="xl" className="group animate-pulse-glow">
-              Start Your Journey
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            <Button variant="hero" size="xl" className="group animate-pulse-glow" asChild>
+              <Link to="/contact">
+                Start Your Journey
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Link>
             </Button>
-            <Button variant="outline" size="xl">
-              Contact Us
+            <Button variant="outline" size="xl" asChild>
+              <Link to="/custom-treks">Custom Expeditions</Link>
             </Button>
           </div>
 

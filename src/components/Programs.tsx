@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock, Mountain, Users, Calendar, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
 import trekkingImage from "@/assets/trekking-experience.jpg";
 import customTrekImage from "@/assets/custom-trek.jpg";
 import spiritualImage from "@/assets/spiritual-journey.jpg";
@@ -11,25 +12,58 @@ const programs = [
     subtitle: "Classic & Offbeat Trails",
     description: "Professionally led expeditions across varied terrains and altitudes. From iconic routes to lesser-known paths, each trek delivers an unforgettable experience with emphasis on safety and authenticity.",
     image: trekkingImage,
-    features: ["Certified mountaineers", "Acclimatization focused", "Sustainable practices"],
+    link: "/expeditions",
+    features: [
+      "Certified mountaineers leading every expedition",
+      "Carefully planned acclimatization schedules",
+      "Authentic trails away from overcrowded routes",
+      "Sustainable and responsible trekking practices"
+    ],
+    stats: [
+      { icon: Mountain, label: "Altitude", value: "3,000 - 6,000m" },
+      { icon: Clock, label: "Duration", value: "5 - 21 Days" },
+      { icon: Users, label: "Group Size", value: "4 - 12 People" },
+    ],
     alt: "Group of trekkers on a Himalayan trail with snow-capped peaks in the background"
   },
   {
     id: 2,
     title: "Personalized & Custom Treks",
     subtitle: "Your Journey, Your Way",
-    description: "Fully tailored expeditions based on your preferences, fitness level, and interests. Whether seeking a challenging high-altitude adventure or a slow immersive journey, we craft the perfect experience.",
+    description: "Fully tailored expeditions based on your preferences, fitness level, and interests. Whether seeking a challenging high-altitude adventure or a slow immersive journey, we craft the perfect experience just for you.",
     image: customTrekImage,
-    features: ["Custom route planning", "Flexible schedules", "Private expeditions"],
+    link: "/custom-treks",
+    features: [
+      "Custom route planning based on your goals",
+      "Flexible schedules that fit your timeline",
+      "Private or small group expedition formats",
+      "Specialized difficulty and altitude planning"
+    ],
+    stats: [
+      { icon: Calendar, label: "Flexibility", value: "Year Round" },
+      { icon: Users, label: "Group Size", value: "1 - 8 People" },
+      { icon: Mountain, label: "Difficulty", value: "Your Choice" },
+    ],
     alt: "Illuminated tent under starry night sky with Himalayan peaks in background"
   },
   {
     id: 3,
     title: "Spiritual & Wellness Journeys",
     subtitle: "Paths of the Sages",
-    description: "Following routes once walked by saints and sages, these journeys are designed for travelers seeking peace, reflection, and connection with the divine energy of the mountains.",
+    description: "Following routes once walked by saints and sages, these journeys are designed for travelers of all age groups seeking peace, reflection, and connection with the divine energy of the mountains.",
     image: spiritualImage,
-    features: ["Spiritually significant routes", "Mindful travel", "All age groups"],
+    link: "/spiritual-journeys",
+    features: [
+      "Spiritually significant Himalayan routes",
+      "Mindful travel experiences with meditation",
+      "Balance of light trekking and cultural immersion",
+      "Suitable for all age groups and fitness levels"
+    ],
+    stats: [
+      { icon: Clock, label: "Duration", value: "7 - 14 Days" },
+      { icon: Users, label: "Group Size", value: "6 - 15 People" },
+      { icon: Mountain, label: "Difficulty", value: "Easy - Moderate" },
+    ],
     alt: "Ancient monastery on cliff edge with misty mountains and golden sunrise"
   }
 ];
@@ -51,11 +85,11 @@ const Programs = () => {
           </p>
         </div>
 
-        <div className="space-y-16 lg:space-y-24">
+        <div className="space-y-24 lg:space-y-32">
           {programs.map((program, index) => (
             <div 
               key={program.id}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center opacity-0 animate-fade-up`}
+              className={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center opacity-0 animate-fade-up`}
               style={{ animationDelay: `${(index + 3) * 150}ms` }}
             >
               {/* Image */}
@@ -67,11 +101,24 @@ const Programs = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6">
-                  <span className="text-primary text-sm font-body tracking-wider uppercase">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+                
+                {/* Stats overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <span className="text-primary text-sm font-body tracking-wider uppercase block mb-4">
                     {program.subtitle}
                   </span>
+                  <div className="flex flex-wrap gap-4">
+                    {program.stats.map((stat) => (
+                      <div key={stat.label} className="flex items-center gap-2 bg-background/80 backdrop-blur-sm rounded-lg px-3 py-2">
+                        <stat.icon className="w-4 h-4 text-primary" />
+                        <div>
+                          <p className="text-xs text-muted-foreground">{stat.label}</p>
+                          <p className="text-sm font-medium text-foreground">{stat.value}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -80,23 +127,25 @@ const Programs = () => {
                 <h3 className="font-display text-3xl md:text-4xl font-semibold mb-4">
                   {program.title}
                 </h3>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                   {program.description}
                 </p>
                 
                 {/* Features */}
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-4 mb-8">
                   {program.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-3 text-foreground/80">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      {feature}
+                    <li key={feature} className="flex items-start gap-3 text-foreground/90">
+                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                <Button variant="gold" size="lg" className="group">
-                  Explore Program
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <Button variant="gold" size="lg" className="group" asChild>
+                  <Link to={program.link}>
+                    Explore {program.id === 2 ? 'Options' : 'Program'}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
                 </Button>
               </div>
             </div>
