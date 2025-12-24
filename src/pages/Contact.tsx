@@ -4,27 +4,45 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin, Send, Mountain } from "lucide-react";
-import { useState } from "react";
+
 import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    const formData = new FormData(e.target as HTMLFormElement);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const phone = formData.get('phone') as string;
+    const program = formData.get('program') as string;
+    const dates = formData.get('dates') as string;
+    const message = formData.get('message') as string;
+    
+    // Build WhatsApp message
+    const whatsappMessage = `*New Inquiry from Website*
+    
+*Name:* ${name}
+*Email:* ${email}
+*Phone:* ${phone || 'Not provided'}
+*Program:* ${program || 'Not selected'}
+*Dates:* ${dates || 'Not specified'}
+
+*Message:*
+${message}`;
+    
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappUrl = `https://wa.me/919068048494?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
     
     toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. We'll get back to you within 24 hours.",
+      title: "Redirecting to WhatsApp",
+      description: "Complete your message on WhatsApp to reach us directly.",
     });
-    
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
   };
 
   return (
@@ -147,9 +165,8 @@ const Contact = () => {
                   variant="hero" 
                   size="lg" 
                   className="w-full sm:w-auto"
-                  disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  Send via WhatsApp
                   <Send className="w-4 h-4" />
                 </Button>
               </form>
