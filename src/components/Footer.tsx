@@ -12,7 +12,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="inline-block mb-4">
-              <img src={logoWhite} alt="HIMO" className="h-12 w-auto invert" />
+              <img src={logoWhite} alt="HIMO" className="h-12 w-auto" />
             </Link>
             <p className="text-muted-foreground max-w-md mb-6">
               Himalayan Indian Mountain Outdoor — A collective of passionate mountaineers, 
@@ -70,7 +70,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-3 text-muted-foreground">
                 <Phone className="w-5 h-5 text-primary mt-0.5" />
-                <span>+91 98xxx xxxxx</span>
+                <a href="https://wa.me/919068048494" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">+91 90680 48494</a>
               </li>
               <li className="flex items-start gap-3 text-muted-foreground">
                 <MapPin className="w-5 h-5 text-primary mt-0.5" />
