@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instagram, Facebook, Mail, Phone, MapPin } from "lucide-react";
+import logoWhite from "@/assets/logo-white.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,9 +11,8 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link to="/" className="font-display text-3xl font-bold tracking-tight inline-block mb-4">
-              <span className="text-foreground">HI</span>
-              <span className="text-primary">MO</span>
+            <Link to="/" className="inline-block mb-4">
+              <img src={logoWhite} alt="HIMO" className="h-12 w-auto" />
             </Link>
             <p className="text-muted-foreground max-w-md mb-6">
               Himalayan Indian Mountain Outdoor — A collective of passionate mountaineers, 
