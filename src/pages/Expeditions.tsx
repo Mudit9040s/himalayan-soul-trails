@@ -11,6 +11,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 
 // Auden's Col Full Itinerary
 const audensColItinerary = [
@@ -184,8 +190,6 @@ const ExpeditionCard = ({ name, altitude, duration, season, location, difficulty
 );
 
 const Expeditions = () => {
-  const [showFullAudensItinerary, setShowFullAudensItinerary] = useState(false);
-
   return (
     <main className="min-h-screen bg-background">
       <Navigation />
@@ -217,7 +221,7 @@ const Expeditions = () => {
       </section>
 
       {/* Quick Stats */}
-      <section className="py-16 border-y border-border/50 bg-card/50">
+      <section className="py-12 border-y border-border/50 bg-card/50">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -236,288 +240,299 @@ const Expeditions = () => {
         </div>
       </section>
 
-      {/* Featured: Auden's Col */}
-      <section className="py-20 md:py-28">
+      {/* Tabbed Expeditions */}
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <span className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4 block">
-              Featured Expedition
+              Explore Our Offerings
             </span>
             <h2 className="font-display text-3xl md:text-5xl font-semibold mb-4">
-              Auden's Col <span className="text-gradient italic">Trek</span>
-            </h2>
-            <p className="text-muted-foreground max-w-3xl mx-auto">
-              The holy grail of trekking in the Western Himalayas - more difficult than Kalindi Khal, 
-              one of the most dangerous treks in India.
-            </p>
-          </div>
-
-          {/* Stats Bar */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto">
-            {[
-              { label: "Grade", value: "Difficult" },
-              { label: "Altitude", value: "5,490m" },
-              { label: "Duration", value: "16 Days" },
-              { label: "Location", value: "Uttarakhand" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center p-4 rounded-xl bg-card border border-border/50">
-                <p className="text-primary font-semibold text-lg">{stat.value}</p>
-                <p className="text-muted-foreground text-sm">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Overview */}
-          <div className="max-w-4xl mx-auto mb-12">
-            <div className="prose prose-invert max-w-none">
-              <p className="text-foreground/90 leading-relaxed text-lg mb-6">
-                Auden's Col is an impossibly high, glaciated pass between the ginormous Gangotri and Jogin massifs, 
-                serving as the climax of a long, treacherous journey between the pilgrimage towns of <strong className="text-primary">Gangotri</strong> and <strong className="text-primary">Kedarnath</strong>.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                Starting from Gangotri, one of the best trailheads in the country, the trek takes you high in the Garhwal Himalayas. 
-                You climb through dense birch and oak forests, onto vast meadows with panoramic views, then harsh alpine terrain 
-                over moraine fields, steep snow slopes, and the heavily crevassed Khatling glacier.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                The first crossing was made by J.B. Auden in 1939, with the next recorded crossing 44 years later. 
-                There are no 'easy' days here - the trek requires immense patience and doesn't forgive those who don't acclimatize well. 
-                Perfect for seasoned trekkers looking to step up their Himalayan game.
-              </p>
-            </div>
-          </div>
-
-          {/* Itinerary */}
-          <div className="max-w-4xl mx-auto bg-card rounded-2xl border border-border/50 p-6 md:p-8">
-            <h3 className="font-display text-2xl font-semibold mb-6">Day-by-Day Itinerary</h3>
-            <div className={!showFullAudensItinerary ? "max-h-[400px] overflow-hidden relative" : ""}>
-              <ItineraryAccordion itinerary={audensColItinerary} />
-              {!showFullAudensItinerary && (
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-card to-transparent" />
-              )}
-            </div>
-            <Button 
-              variant="ghost" 
-              className="w-full mt-4 text-primary hover:text-primary"
-              onClick={() => setShowFullAudensItinerary(!showFullAudensItinerary)}
-            >
-              {showFullAudensItinerary ? (
-                <>Show Less <ChevronUp className="w-4 h-4 ml-2" /></>
-              ) : (
-                <>View Full Itinerary <ChevronDown className="w-4 h-4 ml-2" /></>
-              )}
-            </Button>
-          </div>
-
-          <div className="text-center mt-8">
-            <Button variant="hero" size="xl" asChild>
-              <Link to="/contact">
-                Book Auden's Col Expedition
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Everest Base Camp */}
-      <section className="py-20 md:py-28 bg-card/30">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <span className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4 block">
-              International Expedition
-            </span>
-            <h2 className="font-display text-3xl md:text-5xl font-semibold mb-4">
-              Everest Base Camp <span className="text-gradient italic">Trek</span>
-            </h2>
-            <p className="text-muted-foreground max-w-3xl mx-auto">
-              Stand at the foot of the world's highest peak. A 14-day journey through the legendary Khumbu region of Nepal.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto">
-            {[
-              { label: "Highest Point", value: "5,645m" },
-              { label: "Duration", value: "14 Days" },
-              { label: "Location", value: "Nepal" },
-              { label: "Difficulty", value: "Challenging" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center p-4 rounded-xl bg-card border border-border/50">
-                <p className="text-primary font-semibold text-lg">{stat.value}</p>
-                <p className="text-muted-foreground text-sm">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="max-w-4xl mx-auto bg-card rounded-2xl border border-border/50 p-6 md:p-8">
-            <h3 className="font-display text-2xl font-semibold mb-6">Day-by-Day Itinerary</h3>
-            <ItineraryAccordion itinerary={ebcItinerary} />
-          </div>
-
-          <div className="text-center mt-8">
-            <Button variant="gold" size="lg" asChild>
-              <Link to="/contact">
-                Inquire About EBC Trek
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Kailash Mansarovar */}
-      <section className="py-20 md:py-28">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <span className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4 block">
-              Sacred Pilgrimage
-            </span>
-            <h2 className="font-display text-3xl md:text-5xl font-semibold mb-4">
-              Kailash Mansarovar <span className="text-gradient italic">Yatra</span>
-            </h2>
-            <p className="text-muted-foreground max-w-3xl mx-auto">
-              The ultimate spiritual journey to Mount Kailash and the sacred Lake Mansarovar. 
-              Cross the mighty Dolma-La Pass at 5,630m.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto">
-            {[
-              { label: "Highest Point", value: "5,630m" },
-              { label: "Duration", value: "15 Days" },
-              { label: "Location", value: "Tibet, China" },
-              { label: "Route", value: "Kathmandu-Kailash" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center p-4 rounded-xl bg-card border border-border/50">
-                <p className="text-primary font-semibold text-lg">{stat.value}</p>
-                <p className="text-muted-foreground text-sm">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="max-w-4xl mx-auto mb-8">
-            <p className="text-foreground/90 leading-relaxed text-center">
-              <strong className="text-primary">Places to See:</strong> Holy River Brahmaputra, Lake Mansarovar, Mt. Kailash, 
-              Rakshas Tal, Astapath, Nandi Parvat, Kailash Charan Sparsha, Gauri Kund, Tirthapuri
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto bg-card rounded-2xl border border-border/50 p-6 md:p-8">
-            <h3 className="font-display text-2xl font-semibold mb-6">Day-by-Day Itinerary</h3>
-            <ItineraryAccordion itinerary={kailashItinerary} />
-          </div>
-
-          <div className="text-center mt-8">
-            <Button variant="gold" size="lg" asChild>
-              <Link to="/contact">
-                Inquire About Kailash Yatra
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* High Altitude Passes */}
-      <section className="py-20 md:py-28 bg-card/30">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <span className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4 block">
-              Extreme Adventures
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-semibold mb-4">
-              High Altitude <span className="text-gradient italic">Passes</span>
+              Choose Your <span className="text-gradient italic">Adventure</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Cross the most challenging passes in the Himalayas. Season: May-June, September-October.
+              Select a category below to explore detailed itineraries and expedition information.
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {highAltitudePasses.map((pass, index) => (
-              <div key={pass.name} className="opacity-0 animate-fade-up" style={{ animationDelay: `${index * 100}ms` }}>
-                <ExpeditionCard {...pass} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Non-Technical Peaks */}
-      <section className="py-20 md:py-28">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <span className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4 block">
-              Peak Climbing
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-semibold mb-4">
-              Non-Technical <span className="text-gradient italic">Peaks</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Your gateway to mountaineering. Challenging summits without technical climbing requirements. 
-              Season: May-June, September-October.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {nonTechnicalPeaks.map((peak, index) => (
-              <div key={peak.name} className="opacity-0 animate-fade-up" style={{ animationDelay: `${index * 100}ms` }}>
-                <ExpeditionCard {...peak} season="May-Jun, Sep-Oct" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <Tabs defaultValue="audens-col" className="w-full">
+            <TabsList className="flex flex-wrap justify-center gap-2 bg-transparent h-auto mb-12">
+              <TabsTrigger 
+                value="audens-col" 
+                className="px-6 py-3 rounded-full border border-border/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary transition-all"
+              >
+                Auden's Col
+              </TabsTrigger>
+              <TabsTrigger 
+                value="everest" 
+                className="px-6 py-3 rounded-full border border-border/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary transition-all"
+              >
+                Everest Base Camp
+              </TabsTrigger>
+              <TabsTrigger 
+                value="kailash" 
+                className="px-6 py-3 rounded-full border border-border/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary transition-all"
+              >
+                Kailash Mansarovar
+              </TabsTrigger>
+              <TabsTrigger 
+                value="passes" 
+                className="px-6 py-3 rounded-full border border-border/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary transition-all"
+              >
+                High Altitude Passes
+              </TabsTrigger>
+              <TabsTrigger 
+                value="non-technical" 
+                className="px-6 py-3 rounded-full border border-border/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary transition-all"
+              >
+                Non-Technical Peaks
+              </TabsTrigger>
+              <TabsTrigger 
+                value="technical" 
+                className="px-6 py-3 rounded-full border border-border/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary transition-all"
+              >
+                Technical Peaks
+              </TabsTrigger>
+              <TabsTrigger 
+                value="treks" 
+                className="px-6 py-3 rounded-full border border-border/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary transition-all"
+              >
+                Treks
+              </TabsTrigger>
+            </TabsList>
 
-      {/* Technical Peaks */}
-      <section className="py-20 md:py-28 bg-card/30">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <span className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4 block">
-              Advanced Mountaineering
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-semibold mb-4">
-              Technical <span className="text-gradient italic">Peaks</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              For experienced mountaineers seeking serious summit challenges. 
-              Requires prior high-altitude experience and technical skills.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {technicalPeaks.map((peak, index) => (
-              <div key={peak.name} className="opacity-0 animate-fade-up" style={{ animationDelay: `${index * 100}ms` }}>
-                <ExpeditionCard {...peak} season="May-Jun, Sep-Oct" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            {/* Auden's Col */}
+            <TabsContent value="audens-col" className="animate-fade-up">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-8">
+                  <h3 className="font-display text-3xl md:text-4xl font-semibold mb-4">
+                    Auden's Col <span className="text-gradient italic">Trek</span>
+                  </h3>
+                  <p className="text-muted-foreground max-w-3xl mx-auto">
+                    The holy grail of trekking in the Western Himalayas - more difficult than Kalindi Khal, 
+                    one of the most dangerous treks in India.
+                  </p>
+                </div>
 
-      {/* Treks */}
-      <section className="py-20 md:py-28">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <span className="text-primary font-body text-sm tracking-[0.3em] uppercase mb-4 block">
-              Himalayan Treks
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl font-semibold mb-4">
-              Classic <span className="text-gradient italic">Treks</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore sacred lakes, mysterious valleys, and pristine wilderness. 
-              Season: April-June, September-October.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {treks.map((trek, index) => (
-              <div key={trek.name} className="opacity-0 animate-fade-up" style={{ animationDelay: `${index * 100}ms` }}>
-                <ExpeditionCard {...trek} />
+                {/* Stats */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                  {[
+                    { label: "Grade", value: "Difficult" },
+                    { label: "Altitude", value: "5,490m" },
+                    { label: "Duration", value: "16 Days" },
+                    { label: "Location", value: "Uttarakhand" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="text-center p-4 rounded-xl bg-card border border-border/50">
+                      <p className="text-primary font-semibold text-lg">{stat.value}</p>
+                      <p className="text-muted-foreground text-sm">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Overview */}
+                <div className="mb-10">
+                  <p className="text-foreground/90 leading-relaxed text-lg mb-4">
+                    Auden's Col is an impossibly high, glaciated pass between the ginormous Gangotri and Jogin massifs, 
+                    serving as the climax of a long, treacherous journey between <strong className="text-primary">Gangotri</strong> and <strong className="text-primary">Kedarnath</strong>.
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    You climb through dense birch and oak forests, onto vast meadows with panoramic views, then harsh alpine terrain 
+                    over moraine fields, steep snow slopes, and the heavily crevassed Khatling glacier. The first crossing was made by J.B. Auden in 1939.
+                  </p>
+                </div>
+
+                {/* Itinerary */}
+                <div className="bg-card rounded-2xl border border-border/50 p-6 md:p-8 mb-8">
+                  <h4 className="font-display text-2xl font-semibold mb-6">Day-by-Day Itinerary</h4>
+                  <ItineraryAccordion itinerary={audensColItinerary} />
+                </div>
+
+                <div className="text-center">
+                  <Button variant="hero" size="xl" asChild>
+                    <Link to="/contact">
+                      Book This Expedition
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
-            ))}
-          </div>
+            </TabsContent>
+
+            {/* Everest Base Camp */}
+            <TabsContent value="everest" className="animate-fade-up">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-8">
+                  <h3 className="font-display text-3xl md:text-4xl font-semibold mb-4">
+                    Everest Base Camp <span className="text-gradient italic">Trek</span>
+                  </h3>
+                  <p className="text-muted-foreground max-w-3xl mx-auto">
+                    Stand at the foot of the world's highest peak. A 14-day journey through the legendary Khumbu region of Nepal.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                  {[
+                    { label: "Highest Point", value: "5,645m" },
+                    { label: "Duration", value: "14 Days" },
+                    { label: "Location", value: "Nepal" },
+                    { label: "Difficulty", value: "Challenging" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="text-center p-4 rounded-xl bg-card border border-border/50">
+                      <p className="text-primary font-semibold text-lg">{stat.value}</p>
+                      <p className="text-muted-foreground text-sm">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="bg-card rounded-2xl border border-border/50 p-6 md:p-8 mb-8">
+                  <h4 className="font-display text-2xl font-semibold mb-6">Day-by-Day Itinerary</h4>
+                  <ItineraryAccordion itinerary={ebcItinerary} />
+                </div>
+
+                <div className="text-center">
+                  <Button variant="hero" size="xl" asChild>
+                    <Link to="/contact">
+                      Inquire About EBC Trek
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Kailash Mansarovar */}
+            <TabsContent value="kailash" className="animate-fade-up">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-8">
+                  <h3 className="font-display text-3xl md:text-4xl font-semibold mb-4">
+                    Kailash Mansarovar <span className="text-gradient italic">Yatra</span>
+                  </h3>
+                  <p className="text-muted-foreground max-w-3xl mx-auto">
+                    The ultimate spiritual journey to Mount Kailash and the sacred Lake Mansarovar. 
+                    Cross the mighty Dolma-La Pass at 5,630m.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                  {[
+                    { label: "Highest Point", value: "5,630m" },
+                    { label: "Duration", value: "15 Days" },
+                    { label: "Location", value: "Tibet, China" },
+                    { label: "Route", value: "Kathmandu-Kailash" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="text-center p-4 rounded-xl bg-card border border-border/50">
+                      <p className="text-primary font-semibold text-lg">{stat.value}</p>
+                      <p className="text-muted-foreground text-sm">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mb-8 text-center">
+                  <p className="text-foreground/90 leading-relaxed">
+                    <strong className="text-primary">Places to See:</strong> Holy River Brahmaputra, Lake Mansarovar, Mt. Kailash, 
+                    Rakshas Tal, Astapath, Nandi Parvat, Kailash Charan Sparsha, Gauri Kund, Tirthapuri
+                  </p>
+                </div>
+
+                <div className="bg-card rounded-2xl border border-border/50 p-6 md:p-8 mb-8">
+                  <h4 className="font-display text-2xl font-semibold mb-6">Day-by-Day Itinerary</h4>
+                  <ItineraryAccordion itinerary={kailashItinerary} />
+                </div>
+
+                <div className="text-center">
+                  <Button variant="hero" size="xl" asChild>
+                    <Link to="/contact">
+                      Inquire About Kailash Yatra
+                      <ArrowRight className="w-5 h-5" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* High Altitude Passes */}
+            <TabsContent value="passes" className="animate-fade-up">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-10">
+                  <h3 className="font-display text-3xl md:text-4xl font-semibold mb-4">
+                    High Altitude <span className="text-gradient italic">Passes</span>
+                  </h3>
+                  <p className="text-muted-foreground max-w-2xl mx-auto">
+                    Cross the most challenging passes in the Himalayas. Season: May-June, September-October.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {highAltitudePasses.map((pass) => (
+                    <ExpeditionCard key={pass.name} {...pass} />
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Non-Technical Peaks */}
+            <TabsContent value="non-technical" className="animate-fade-up">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-10">
+                  <h3 className="font-display text-3xl md:text-4xl font-semibold mb-4">
+                    Non-Technical <span className="text-gradient italic">Peaks</span>
+                  </h3>
+                  <p className="text-muted-foreground max-w-2xl mx-auto">
+                    Your gateway to mountaineering. Challenging summits without technical climbing requirements. 
+                    Season: May-June, September-October.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {nonTechnicalPeaks.map((peak) => (
+                    <ExpeditionCard key={peak.name} {...peak} />
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Technical Peaks */}
+            <TabsContent value="technical" className="animate-fade-up">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-10">
+                  <h3 className="font-display text-3xl md:text-4xl font-semibold mb-4">
+                    Technical <span className="text-gradient italic">Peaks</span>
+                  </h3>
+                  <p className="text-muted-foreground max-w-2xl mx-auto">
+                    For experienced mountaineers seeking serious summit challenges. 
+                    Requires prior high-altitude experience and technical skills.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {technicalPeaks.map((peak) => (
+                    <ExpeditionCard key={peak.name} {...peak} />
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Treks */}
+            <TabsContent value="treks" className="animate-fade-up">
+              <div className="max-w-5xl mx-auto">
+                <div className="text-center mb-10">
+                  <h3 className="font-display text-3xl md:text-4xl font-semibold mb-4">
+                    Classic <span className="text-gradient italic">Treks</span>
+                  </h3>
+                  <p className="text-muted-foreground max-w-2xl mx-auto">
+                    Explore sacred lakes, mysterious valleys, and pristine wilderness. 
+                    Season: April-June, September-October.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {treks.map((trek) => (
+                    <ExpeditionCard key={trek.name} {...trek} />
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </section>
 
